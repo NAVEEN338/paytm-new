@@ -13,7 +13,7 @@ agent any
     }
      stage ('Deploy'){
       steps{
-       sh 'sudo cp /var/lib/jenkins/workspace/pipelineJob/target/paytm-1.0-SNAPSHOT.war /opt/tomcat9/webapps'
+       sh 'sudo cp -r /var/lib/jenkins/workspace/pipelineJob/target/paytm-1.0-SNAPSHOT.war /opt/tomcat9/webapps'
       }
     }
   }
