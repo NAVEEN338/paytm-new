@@ -11,6 +11,11 @@ agent any
        sh 'mvn clean install'
       }
     }
+     stage ('Deploy'){
+      steps{
+       sh 'sudo cp /var/lib/jenkins/workspace/pipelineJob/target/paytm-1.0-SNAPSHOT.war /opt/tomcat9/webapps'
+      }
+    }
   }
 }
       
