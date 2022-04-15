@@ -13,7 +13,7 @@ agent any
     }
      stage ('Deploy'){
       steps{
-       sh 'sudo cp -r /var/lib/jenkins/workspace/pipelineJob/target/paytm-1.0-SNAPSHOT.jar /opt/tomcat9/webapps'
+       sh 'docker build -t rojakumaridocker/paytm:v1 .'
       }
     }
   }
