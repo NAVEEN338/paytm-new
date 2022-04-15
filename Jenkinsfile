@@ -1,6 +1,6 @@
 pipeline{
 agent any
-  def DOCKER_TAG = param.getDockerTag
+  DOCKER_TAG = param.getDockerTag
   stages {
     stage ('checkout'){
       steps{
