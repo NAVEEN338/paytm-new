@@ -11,9 +11,17 @@ agent any
        sh 'mvn clean install'
       }
     }
-     stage ('Deploy'){
+     stage ('Build Docker image'){
       steps{
        sh 'docker build -t rojakumaridocker/paytm:v1 .'
+      }
+    }
+    stage ('Push to Docker hub'){
+      steps{
+        withCredentials([string(credentialsId: 'rojadockerpwd', variable: 'Dockerpwd')]) {
+          sh "docker login -u rojakumaridocker -p ${Dockerpwd}"
+          sh "docker push rojakumaridocker/paytm:v1"
+        } 
       }
     }
   }
