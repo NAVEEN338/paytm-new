@@ -1,4 +1,4 @@
 FROM openjdk
 MAINTAINER rojakumari
-COPY target/*.jar /
+COPY /target/*.jar /home
 EXPOSE 8080
