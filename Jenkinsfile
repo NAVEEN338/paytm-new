@@ -1,6 +1,5 @@
 pipeline{
 agent any
-  DOCKER_TAG = param.getDockerTag
   stages {
     stage ('checkout'){
       steps{
@@ -14,14 +13,14 @@ agent any
     }
      stage ('Build Docker image'){
       steps{
-       sh "docker build -t rojakumaridocker/paytm:${DOCKER_TAG} ."
+       sh "docker build -t rojakumaridocker/paytm:${param.getDockerTag} ."
       }
     }
     stage ('Push to Docker hub'){
       steps{
         withCredentials([string(credentialsId: 'rojadockerpwd', variable: 'Dockerpwd')]) {
           sh "docker login -u rojakumaridocker -p ${Dockerpwd}"
-          sh "docker push rojakumaridocker/paytm:${DOCKER_TAG}"
+          sh "docker push rojakumaridocker/paytm:${param.getDockerTag}"
         } 
       }
     }
@@ -29,7 +28,7 @@ agent any
       steps{
        sh '''
        chmod +x changeTag.sh
-       ./changeTag.sh ${DOCKER_TAG}
+       ./changeTag.sh ${param.getDockerTag}
        '''
        
       }
