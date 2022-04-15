@@ -1,5 +1,8 @@
 pipeline{
 agent any
+  environment {
+    DOCKER_TAG = getDockerTag()
+  }
   stages {
     stage ('checkout'){
       steps{
@@ -13,15 +16,24 @@ agent any
     }
      stage ('Build Docker image'){
       steps{
-       sh 'docker build -t rojakumaridocker/paytm:v1 .'
+       sh "docker build -t rojakumaridocker/paytm:${DOCKER_TAG} ."
       }
     }
     stage ('Push to Docker hub'){
       steps{
         withCredentials([string(credentialsId: 'rojadockerpwd', variable: 'Dockerpwd')]) {
           sh "docker login -u rojakumaridocker -p ${Dockerpwd}"
-          sh "docker push rojakumaridocker/paytm:v1"
+          sh "docker push rojakumaridocker/paytm:${DOCKER_TAG}"
         } 
+      }
+    }
+    stage ('deploy on k8s'){
+      steps{
+       sh '''
+       chmod +x changeTag.sh
+       ./changeTag.sh ${DOCKER_TAG}
+       '''
+       
       }
     }
   }
