@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: paytm
-        image: rojakumaridocker/paytm:v1
+        image: rojakumaridocker/paytm:version
         ports:
         - containerPort: 8080
         
