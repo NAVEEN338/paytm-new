@@ -26,10 +26,8 @@ agent any
     }
     stage ('deploy on k8s'){
       steps{
-       sh '''
-       chmod +x changeTag.sh
-       ./changeTag.sh ${params.getDockerTag}
-       '''
+       sh "chmod +x changeTag.sh"
+       sh "./changeTag.sh ${params.getDockerTag}"
        
       }
     }
