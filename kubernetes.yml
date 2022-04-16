@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: paytm
-        image: rojakumaridocker/money-transfer:version
+        image: rojakumaridocker/paytm:version
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
