@@ -1,3 +1,4 @@
 FROM openjdk:8
-ADD target/paytm-1.0-SNAPSHOT.jar paytm.jar
-ENTRYPOINT ["java","-jar","paytm.jar"]
+ADD target/paytm-1.0-SNAPSHOT.jar paytm-1.0-SNAPSHOT.jar
+RUN java -cp paytm-1.0-SNAPSHOT.jar Main
+ENTRYPOINT ["java","-jar","paytm-1.0-SNAPSHOT.jar"]
